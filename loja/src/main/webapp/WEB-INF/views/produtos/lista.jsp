@@ -9,6 +9,7 @@
 	mais-Loja</title>
 </head>
 <body>
+	<h1>${status}</h1>
 
 	<table>
 		<tr>

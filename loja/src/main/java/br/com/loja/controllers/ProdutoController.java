@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.loja.dao.ProdutoDAO;
 import br.com.loja.models.Produto;
@@ -28,9 +29,10 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(value = "/produtos", method=RequestMethod.POST)
-	public ModelAndView save(Produto produto) {
+	public ModelAndView save(Produto produto, RedirectAttributes redirectAttributes) {
 		System.out.println(produto);
-		produtoDao.save(produto);
+		produtoDao.save(produto);		
+		redirectAttributes.addFlashAttribute("status", "Produto cadastrado com sucesso");
 		return new ModelAndView("redirect:produtos");
 	}
 	
