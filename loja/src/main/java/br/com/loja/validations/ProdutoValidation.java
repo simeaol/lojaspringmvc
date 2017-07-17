@@ -17,11 +17,11 @@ public class ProdutoValidation implements Validator{
 	public void validate(Object obj, Errors erros) {
 
 		Produto produto = (Produto) obj;
-		ValidationUtils.rejectIfEmpty(erros, "nome", "field.riquired");
-		ValidationUtils.rejectIfEmpty(erros, "descricao", "field.riquired");
+		ValidationUtils.rejectIfEmpty(erros, "nome", "field.required");
+		ValidationUtils.rejectIfEmpty(erros, "descricao", "field.required");
 		
 		if(produto.getPaginas() <=0){
-			erros.rejectValue("paginas", "field.riquired");
+			erros.rejectValue("paginas", "field.required");
 		}
 	
 		

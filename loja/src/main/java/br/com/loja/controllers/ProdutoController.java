@@ -45,7 +45,7 @@ public class ProdutoController {
 	public ModelAndView save(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()){
 			//return form();
-			return new ModelAndView("/form");
+			return new ModelAndView("produtos/form");
 		}
 		produtoDao.save(produto);		
 		redirectAttributes.addFlashAttribute("status", "Produto cadastrado com sucesso");
