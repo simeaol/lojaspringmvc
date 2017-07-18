@@ -12,7 +12,7 @@
 </head>
 <body>
 	<form:form action="${s:mvcUrl('PC#save').build() }" method="POST"
-		commandName="produto">
+		commandName="produto" enctype="multipart/form-data">
 		<div>
 			<label>Nome:</label>
 			<form:input path="nome" />

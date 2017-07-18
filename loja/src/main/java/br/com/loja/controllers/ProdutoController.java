@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.loja.dao.ProdutoDAO;
+import br.com.loja.infra.FileSaver;
 import br.com.loja.models.Produto;
 import br.com.loja.models.TipoPreco;
 import br.com.loja.validations.ProdutoValidation;
@@ -28,6 +29,9 @@ public class ProdutoController {
 	private ProdutoDAO produtoDao;
 	
 	ProdutoValidation ValidationUtils;
+	
+	@Autowired
+	private FileSaver fileSaver;
 
 	@RequestMapping("/form")
 	public ModelAndView form(Produto produto) {
@@ -43,12 +47,16 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(value = "/produtos", method=RequestMethod.POST)
-	public ModelAndView save(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
+	public ModelAndView save(MultipartFile sumario ,@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()){
 			return form(produto);
 			//return new ModelAndView("produtos/form");
 		}
-		produtoDao.save(produto);		
+		String path = fileSaver.write("arquivos-sumario", sumario);
+		produto.setSumario(path);
+		
+		produtoDao.save(produto);	
+		
 		redirectAttributes.addFlashAttribute("status", "Produto cadastrado com sucesso");
 		return new ModelAndView("redirect:produtos");
 	}
