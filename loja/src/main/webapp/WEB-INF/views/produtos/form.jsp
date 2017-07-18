@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,31 +11,41 @@
 	mais-Loja</title>
 </head>
 <body>
-	<form:form action="${s:mvcUrl('PC#save').build() }" method="POST" commandName="produto">
+	<form:form action="${s:mvcUrl('PC#save').build() }" method="POST"
+		commandName="produto">
 		<div>
-			<label>Nome:</label> <input type="text" name="nome" />
+			<label>Nome:</label>
+			<form:input path="nome" />
 			<form:errors path="nome" />
 		</div>
 		<div>
 			<label>Descrição</label>
-			<textarea rows="10" cols="20" name="descricao"></textarea>
+			<form:textarea path="descricao" rows="10" cols="20" />
 			<form:errors path="descricao" />
 		</div>
 		<div>
-			<label>Páginas</label> <input type="text" name="paginas">
+			<label>Páginas</label>
+			<form:input path="paginas" />
 			<form:errors path="paginas" />
+		</div>
+		<div>
+			<label>Data de Lançamento</label>
+			<form:input path="data" />
+			<form:errors path="data" />
 		</div>
 		<div>
 			<c:forEach items="${tipos}" var="precoTipo" varStatus="status">
 				<div>
-					<label>${precoTipo}</label> <input type="text"
-						name="precos[${status.index}].valor" /> <input type="hidden"
-						name="precos[${status.index}].tipo" value="${precoTipo}" />
+					<label>${precoTipo}</label>
+					<form:input path="precos[${status.index}].valor" />
+					<form:hidden path="precos[${status.index}].tipo" value="${precoTipo}" />
 				</div>
-
 			</c:forEach>
 		</div>
-
+		<div>
+			<label>Sumário</label>
+			<input name="sumario" type="file" />
+		</div>
 		<button type="submit">Cadastrar</button>
 	</form:form>
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,7 +30,7 @@ public class ProdutoController {
 	ProdutoValidation ValidationUtils;
 
 	@RequestMapping("/form")
-	public ModelAndView form() {
+	public ModelAndView form(Produto produto) {
 		System.out.println("Exibindo o formulário.");
 		ModelAndView modelAndView = new ModelAndView("produtos/form");
 		modelAndView.addObject("tipos", TipoPreco.values());
@@ -44,8 +45,8 @@ public class ProdutoController {
 	@RequestMapping(value = "/produtos", method=RequestMethod.POST)
 	public ModelAndView save(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()){
-			//return form();
-			return new ModelAndView("produtos/form");
+			return form(produto);
+			//return new ModelAndView("produtos/form");
 		}
 		produtoDao.save(produto);		
 		redirectAttributes.addFlashAttribute("status", "Produto cadastrado com sucesso");
