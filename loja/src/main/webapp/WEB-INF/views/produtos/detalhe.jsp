@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
@@ -134,7 +135,7 @@
 	    <h2 class="section-title">Dados do livro:</h2>
 	    <p>Número de páginas: <span>${produto.paginas }</span></p>
 	    <p></p>
-	    <p>${produto.data }</p>
+	    <p><fmt:formatDate pattern="dd/MM/yyyy" value="${produto.data.time }" /></p>
 	    <p>Encontrou um erro? <a href='/submissao-errata' target='_blank'>Submeta uma errata</a></p>
 	  </section>
 	</div>
