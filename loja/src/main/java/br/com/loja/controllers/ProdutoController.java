@@ -23,7 +23,7 @@ import br.com.loja.models.TipoPreco;
 import br.com.loja.validations.ProdutoValidation;
 
 @Controller
-//@RequestMapping("produtos")
+@RequestMapping("/produtos")
 public class ProdutoController {
 
 	@Autowired
@@ -46,7 +46,7 @@ public class ProdutoController {
 		binder.addValidators(new ProdutoValidation());		
 	}
 
-	@RequestMapping(value = "/produtos", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public ModelAndView save(MultipartFile sumario ,@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
 		System.out.println("File name: "+sumario.getOriginalFilename());
 		/*if(result.hasErrors()){
@@ -62,7 +62,7 @@ public class ProdutoController {
 		return new ModelAndView("redirect:produtos");
 	}
 	
-	@RequestMapping(value="/produtos", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView show(){
 		ModelAndView view = new ModelAndView("produtos/lista");
 		List<Produto> listaProdutos = produtoDao.listAll();
@@ -71,9 +71,9 @@ public class ProdutoController {
 		
 	}
 	
-	@RequestMapping("/detalhe/{id}")
+	@RequestMapping(value="/detalhe/{id}", method=RequestMethod.GET)
 	public ModelAndView detalhe(@PathVariable("id") Integer id){
-		ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
+		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
 		Produto produto = produtoDao.find(id);
 		modelAndView.addObject("produto", produto);
 		return modelAndView;
