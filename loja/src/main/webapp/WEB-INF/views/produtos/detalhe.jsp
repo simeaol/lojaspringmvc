@@ -51,7 +51,10 @@
 				<nav id="main-nav">					
 					<ul class="clearfix">
 						<li>
-							<a href="/carrinho" rel="nofollow">Seu Carrinho</a>
+							<a href="/carrinho" rel="nofollow">
+								Seu carrinho (${carrinhoCompras.quantidade})
+							</a>
+							
 						</li>
 
 						<li>
@@ -104,7 +107,7 @@
 	
 	  
 	  <section class="buy-options clearfix">  
-	  <form action="/carrinho/add" method="post" class="container">
+	  <form action= '<c:url value= "/carrinho/add" />' method="post" class="container">
 	    <ul id="variants" class="clearfix">
 	    <input type="hidden" value="${produto.id }" name="produtoId" />
 	    	<c:forEach items="${produto.precos }" var="preco">
@@ -118,7 +121,7 @@
 	          </li> 
 	        </c:forEach>          
 	    </ul>
-	    <button type="submit" class="submit-image icon-basket-alt" title="Compre Agora" ${produto.nome }></button>
+	    <button type="submit" class="submit-image icon-basket-alt" alt="Compre Agora" title="Compre Agora ${produto.nome }"></button>
 	    
 	  </form>
 	  
