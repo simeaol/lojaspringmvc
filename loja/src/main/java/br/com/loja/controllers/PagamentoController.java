@@ -1,5 +1,7 @@
 package br.com.loja.controllers;
 
+import java.util.concurrent.Callable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,21 +25,22 @@ public class PagamentoController {
 	private RestTemplate restTemplate;
 
 	@RequestMapping(value = "/finalizar", method = RequestMethod.POST)
-	public ModelAndView finalizar(RedirectAttributes attributes) {
+	public Callable<ModelAndView> finalizar(RedirectAttributes attributes) {
 
-		String url = "http://book-payment.herokuapp.com/payment";
-		String response = null;
-		try {
-			response = restTemplate.postForObject(url, new PaymentData(carrinho.getTotal()), String.class);
-			System.out.println("" + carrinho.getTotal());
-			attributes.addFlashAttribute("status", response);
-		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
-			attributes.addFlashAttribute("status", "\t Valor maior que o permitido !");
-			new ModelAndView("redirect:/produtos");
-		}
+		return () -> {
+			String url = "http://book-payment.herokuapp.com/payment";
+			String response = null;
+			try {
+				response = restTemplate.postForObject(url, new PaymentData(carrinho.getTotal()), String.class);
+				System.out.println("" + carrinho.getTotal());
+				attributes.addFlashAttribute("status", response);
+				return new ModelAndView("redirect:/produtos");
+			} catch (HttpClientErrorException e) {
+				e.printStackTrace();
+				attributes.addFlashAttribute("status", "\t Valor maior que o permitido !");
+				return new ModelAndView("redirect:/produtos");
+			}
+		};
 
-
-		return new ModelAndView("redirect:/produtos");
 	}
 }
