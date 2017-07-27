@@ -17,27 +17,27 @@
 			rel="publisher"/>
 		<title>Livros de Java, SOA, Android, iPhone, Ruby on Rails e
 			muito mais - Casa do Código</title>
-		<link href="${contextPath}resources/css/cssbase-min.css"
+		<link href="resources/css/cssbase-min.css"
 			rel="stylesheet" type="text/css" media="all" />
 		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
 			rel='stylesheet'/>
-		<link href="${contextPath}resources/css/fonts.css"
+		<link href="resources/css/fonts.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/fontello-ie7.css"
+		<link href="resources/css/fontello-ie7.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/fontello-embedded.css"
+		<link href="resources/css/fontello-embedded.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/fontello.css"
+		<link href="resources/css/fontello.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/style.css"
+		<link href="resources/css/style.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/layout-colors.css"
+		<link href="resources/css/layout-colors.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/responsive-style.css"
+		<link href="resources/css/responsive-style.css"
 			rel="stylesheet" type="text/css" media="all" />
-		<link href="${contextPath}resources/css/guia-do-programador-style.css" 
+		<link href="resources/css/guia-do-programador-style.css" 
 			rel="stylesheet" type="text/css"  media="all"  />
-	    <link href="${contextPath}resources/css/produtos.css" 
+	    <link href="$resources/css/produtos.css" 
 	    	rel="stylesheet" type="text/css"  media="all"  />
 		<link rel="canonical" href="http://www.casadocodigo.com.br/" />	
 </head>
@@ -112,7 +112,7 @@
 	    <input type="hidden" value="${produto.id }" name="produtoId" />
 	    	<c:forEach items="${produto.precos }" var="preco">
 	    	  <li class="buy-option">
-	            <input type="radio" name="tipo" class="variant-radio" id="tipo" value="${preco.tipo }"  checked="checked"  />
+	            <input type="radio" name="tipoPreco" class="variant-radio" id="tipo" value="${preco.tipo }"  checked="checked"  />
 	            	<label  class="variant-label">
 	              		${preco.tipo }
 	            	</label>
@@ -121,7 +121,7 @@
 	          </li> 
 	        </c:forEach>          
 	    </ul>
-	    <button type="submit" class="submit-image icon-basket-alt" alt="Compre Agora" title="Compre Agora ${produto.nome }"></button>
+	    <input type="submit" class="submit-image icon-basket-alt" alt="Compre Agora" title="Compre Agora ${produto.nome }" value="Compre Agora" />
 	    
 	  </form>
 	  

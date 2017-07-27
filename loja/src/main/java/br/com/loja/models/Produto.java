@@ -1,5 +1,6 @@
 package br.com.loja.models;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -21,15 +22,15 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private double paginas;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar data;
-	
+
 	@ElementCollection
 	private List<Preco> precos;
 
 	private String sumario;
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -61,7 +62,7 @@ public class Produto {
 	public void setPaginas(double paginas) {
 		this.paginas = paginas;
 	}
-	
+
 	public List<Preco> getPrecos() {
 		return precos;
 	}
@@ -69,7 +70,6 @@ public class Produto {
 	public void setPrecos(List<Preco> precos) {
 		this.precos = precos;
 	}
-	
 
 	public Calendar getData() {
 		return data;
@@ -85,6 +85,10 @@ public class Produto {
 
 	public void setSumario(String sumario) {
 		this.sumario = sumario;
+	}
+
+	public BigDecimal precoPara(TipoPreco tipoPreco) {
+		return precos.stream().filter(preco -> preco.getTipo().equals(tipoPreco)).findFirst().get().getValor();
 	}
 
 	@Override
@@ -114,7 +118,5 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	
 
 }
