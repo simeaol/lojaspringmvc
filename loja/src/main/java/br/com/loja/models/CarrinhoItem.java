@@ -1,7 +1,12 @@
 package br.com.loja.models;
 
-public class CarrinhoItem {
+import java.io.Serializable;
+import java.math.BigDecimal;
 
+public class CarrinhoItem implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	
 	private Produto produto;
 	private TipoPreco tipoPreco;
 
@@ -24,6 +29,10 @@ public class CarrinhoItem {
 
 	public void setTipoPreco(TipoPreco tipoPreco) {
 		this.tipoPreco = tipoPreco;
+	}
+	
+	public BigDecimal getPreco(){
+		return produto.precoPara(tipoPreco);
 	}
 
 	@Override
@@ -52,6 +61,10 @@ public class CarrinhoItem {
 		if (tipoPreco != other.tipoPreco)
 			return false;
 		return true;
+	}
+
+	public BigDecimal getTotal(Integer quantidade) {
+		return this.getPreco().multiply(new BigDecimal(quantidade));
 	}
 	
 	
