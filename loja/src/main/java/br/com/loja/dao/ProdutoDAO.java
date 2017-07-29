@@ -22,7 +22,7 @@ public class ProdutoDAO {
 		entityManager.persist(produto);
 	}
 
-	public List<Produto> listAll() {
+	public List<Produto> findAll() {
 		return entityManager.createQuery("select p from Produto p", Produto.class).getResultList();
 	}
 
