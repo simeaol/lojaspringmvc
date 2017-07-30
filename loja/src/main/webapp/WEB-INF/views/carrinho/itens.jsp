@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:url value="/" var="contextPath" />
+	<c:url value="/resources/css" var="cssPath"></c:url>	
 	  <meta charset="utf-8"/>
 		  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 		  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -17,29 +17,19 @@
 			rel="publisher"/>
 		<title>Livros de Java, SOA, Android, iPhone, Ruby on Rails e
 			muito mais - Casa do Código</title>
-		<link href="resources/css/cssbase-min.css"
-			rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/cssbase-min.css" rel="stylesheet" type="text/css" media="all" />
 		<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
 			rel='stylesheet'/>
-		<link href="resources/css/fonts.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/fontello-ie7.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/fontello-embedded.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/fontello.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/style.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/layout-colors.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/responsive-style.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="resources/css/guia-do-programador-style.css" 
-			rel="stylesheet" type="text/css"  media="all"  />
-	    <link href="resources/css/produtos.css" 
-	    	rel="stylesheet" type="text/css"  media="all"  />
-		<link rel="canonical" href="http://www.casadocodigo.com.br/" />	
+		<link href="${cssPath}/fonts.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/fontello-ie7.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/fontello-embedded.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/fontello.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/layout-colors.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/responsive-style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="${cssPath}/guia-do-programador-style.css" rel="stylesheet" type="text/css"  media="all"  />
+	    <link href="${cssPath}/produtos.css" rel="stylesheet" type="text/css"  media="all"  />
+		<link rel="canonical" href="http://www.casadocodigo.com.br/" />
 </head>
 <body>
 
@@ -114,7 +104,8 @@
 			          <td class="numeric-cell">${carrinhoCompras.getTotal(item) }</td>			          
 			          	<td class="remove-item">
 			          		<form action="${s:mvcUrl('CCC#remover').arg(0, item.produto.id).arg(1, item.tipoPreco).build() }" method="post">
-			          			<input type="image" src="src/main/webapp/resources/imagens/excluir.png" alt="Excluir" title="Excluir" />
+			          			<c:url value="/resources/imagens" var="imagesPath"></c:url>
+			          			<input type="image" src="${imagesPath}/excluir.png" alt="Excluir" title="Excluir" />
 			          		</form>
 			          </td>
 			      </tr>

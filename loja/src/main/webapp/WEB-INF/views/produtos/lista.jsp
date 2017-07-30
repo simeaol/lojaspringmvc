@@ -7,6 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Livros de Java, Android, iPhone, PHP, Ruby e muito
 	mais-Loja</title>
+	
+<c:url value="/resources/css" var="cssPath"></c:url>	
+<link rel="stylesheet" href="${cssPath}/bootstrap.min.css" >
+<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" >
 </head>
 <body>
 	<h1>${status}</h1>
