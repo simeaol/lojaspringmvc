@@ -1,8 +1,11 @@
 package br.com.loja.conf;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +19,8 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.google.common.cache.CacheBuilder;
 
 import br.com.loja.controllers.HomeController;
 import br.com.loja.dao.ProdutoDAO;
@@ -72,6 +77,13 @@ public class AppWebConfiguration {
 
 	@Bean
 	public CacheManager cacheManager(){
-		return new ConcurrentMapCacheManager();
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
+		builder.maximumSize(100);//Tamamho máximo de objetos no cache
+		builder.expireAfterAccess(5, TimeUnit.MINUTES);//Tempo para expiração do cache após acesso
+		
+		GuavaCacheManager cacheManager = new GuavaCacheManager();//Gerenciador de Cache <Guava>. Usar @ConcurrentMapCacheManager apenas para teste
+		cacheManager.setCacheBuilder(builder);
+		
+		return cacheManager();
 	}
 }
