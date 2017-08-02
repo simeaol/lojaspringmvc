@@ -112,6 +112,7 @@
 	        </c:forEach>          
 	    </ul>
 	    <input type="submit" class="submit-image icon-basket-alt" alt="Compre Agora" title="Compre Agora ${produto.nome }" value="Compre Agora" />
+	    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 	    
 	  </form>
 	  
